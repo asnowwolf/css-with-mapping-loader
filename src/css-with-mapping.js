@@ -1,11 +1,25 @@
 /**
  * @see https://webpack.github.io/docs/loaders.html
  */
-module.exports = function (script) {
-    var content = this.exec(script, __filename);
-    if (!content || content.length !== 1) {
-        throw new Error('The css-with-mapping-loader must be chained after the css-loader\n' + content);
-    }
+module.exports = function () {};
+
+/**
+ * @see https://webpack.github.io/docs/loaders.html#pitching-loader
+ */
+module.exports.pitch = function (remainingRequest) {
+    this.cacheable && this.cacheable();
+
+    var loaderUtils = require('loader-utils');
+    return encode.toString() + '\n' +
+        'var result = require(' + loaderUtils.stringifyRequest(this, "!!" + remainingRequest) + ');\n' +
+        'if (typeof result === "string") {\n' +
+        'module.exports = result;\n' +
+        '} else {\n' +
+        'module.exports = encode(result);\n' +
+        '}\n';
+};
+
+function encode(content) {
     var cssObject = content[0];
     var cssContent = cssObject[1] || '';
     var cssMapping = cssObject[3];
@@ -17,5 +31,5 @@ module.exports = function (script) {
     var sourceURLs = cssMapping.sources.map(function (source) {
         return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
     });
-    return 'module.exports = ' + JSON.stringify([cssContent].concat(sourceURLs).concat([sourceMapping]).join('\n'));
-};
+    return [cssContent].concat(sourceURLs).concat([sourceMapping]).join('\n');
+}

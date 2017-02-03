@@ -1,7 +1,7 @@
 {
   "name": "css-with-mapping-loader",
   "description": "css to string with source mapping loader for webpack",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "main": "./src/css-with-mapping.js",
   "author": {
     "name": "Zhicheng Wang",
