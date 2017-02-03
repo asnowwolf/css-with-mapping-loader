@@ -1,0 +1,25 @@
+{
+  "name": "css-with-mapping-loader",
+  "description": "css to string with source mapping loader for webpack",
+  "version": "0.0.1",
+  "main": "./src/css-with-mapping.js",
+  "author": {
+    "name": "Zhicheng Wang",
+    "email": "asnowwolf@gmail.com",
+    "url": "https://github.com/asnowwolf/css-with-mapping-loader"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:asnowwolf/css-with-mapping-loader.git"
+  },
+  "keywords": [
+    "webpack",
+    "css-with-mapping",
+    "css-to-string",
+    "to-string"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "convert-source-map": "^1.3.0"
+  }
+}
