@@ -3,7 +3,7 @@
 ## Usage
 
 ```js
-var result = require('css-with-mapping!css!sass!./test.scss');
+var result = require('css-with-mapping-loader!css-loader!sass-loader!./test.scss');
 // => returns sass rendered to CSS with /*# sourceURL=... */ and /*# sourceMappingURL=... */.
 ```
 
