@@ -20,14 +20,19 @@ module.exports.pitch = function (remainingRequest) {
 };
 
 function encode(content) {
+    function convertSourceMapToComment(sourcemap){
+        var base64 =  new Buffer(JSON.stringify(sourcemap)).toString('base64');
+        var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+        return '/*# ' + data + ' */'
+    }
+
     var cssObject = content[0];
     var cssContent = cssObject[1] || '';
     var cssMapping = cssObject[3];
     if (!cssMapping) {
         return cssContent;
     }
-    var convertSourceMap = require('convert-source-map');
-    var sourceMapping = convertSourceMap.fromObject(cssMapping).toComment({multiline: true});
+    var sourceMapping = convertSourceMapToComment(cssMapping);
     var sourceURLs = cssMapping.sources.map(function (source) {
         return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
     });
